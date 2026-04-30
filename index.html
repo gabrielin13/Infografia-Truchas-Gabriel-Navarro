@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crianza de Truchas | Infografía Interactiva</title>
+    <style>
+        @font-face {
+            font-family: 'TruchaFont';
+            src: url('fonts/Gabrielnavarrofont-Regular.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --principal: #005F73;
+            --secundario: #0A9396;
+            --acento: #94D2BD;
+            --bg-light: #F0F7F4;
+            --bg-dark: #003844;
+            --bg-mid: #004E5A;
+            --text-dark: #1A2E35;
+            --text-light: #E0F2F1;
+            --text-muted: #6B8F8A;
+            --card-shadow: 0 4px 20px rgba(0, 95, 115, 0.1);
+            --card-shadow-hover: 0 12px 36px rgba(0, 95, 115, 0.2);
+            --radius: 16px;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.65;
+            background: var(--bg-light);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2 {
+            font-family: 'TruchaFont', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: #fff;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            color: var(--principal);
+            margin-bottom: 1.2rem;
+        }
+
+        .dark-section h2 {
+            color: var(--text-light);
+        }
+
+        p {
+            font-size: clamp(0.92rem, 2vw, 1.05rem);
+            color: var(--text-muted);
+            max-width: 680px;
+        }
+
+        .header {
+            position: relative;
+            min-height: 65vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: linear-gradient(165deg, var(--bg-dark) 0%, var(--principal) 50%, var(--secundario) 100%);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 20%, rgba(148, 210, 189, 0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 80%, rgba(10, 147, 150, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header-emoji {
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            display: inline-block;
+            animation: bob 3.5s ease-in-out infinite;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+        }
+
+        @keyframes bob {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+
+        .header-subtitle {
+            font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+            color: var(--acento);
+            margin-top: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(148, 210, 189, 0.08);
+            border: 1px solid rgba(148, 210, 189, 0.1);
+            animation: float-up linear infinite;
+            pointer-events: none;
+        }
+
+        .bubble:nth-child(1) { width: 20px; height: 20px; left: 10%; bottom: -20px; animation-duration: 8s; animation-delay: 0s; }
+        .bubble:nth-child(2) { width: 35px; height: 35px; left: 25%; bottom: -35px; animation-duration: 11s; animation-delay: 2s; }
+        .bubble:nth-child(3) { width: 15px; height: 15px; left: 45%; bottom: -15px; animation-duration: 7s; animation-delay: 4s; }
+        .bubble:nth-child(4) { width: 28px; height: 28px; left: 65%; bottom: -28px; animation-duration: 10s; animation-delay: 1s; }
+        .bubble:nth-child(5) { width: 22px; height: 22px; left: 80%; bottom: -22px; animation-duration: 9s; animation-delay: 3s; }
+        .bubble:nth-child(6) { width: 18px; height: 18px; left: 55%; bottom: -18px; animation-duration: 12s; animation-delay: 5s; }
+        .bubble:nth-child(7) { width: 40px; height: 40px; left: 35%; bottom: -40px; animation-duration: 13s; animation-delay: 0.5s; }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-70vh) scale(0.3); opacity: 0; }
+        }
+
+        .wave {
+            display: block;
+            width: 100%;
+            line-height: 0;
+            margin-top: -1px;
+        }
+
+        .wave svg {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .section {
+            padding: 3rem 1.25rem;
+        }
+
+        .section-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .dark-section {
+            background: var(--bg-dark);
+            color: var(--text-light);
+        }
+
+        .dark-section p {
+            color: rgba(224, 242, 241, 0.7);
+        }
+
+        .accent-section {
+            background: linear-gradient(135deg, rgba(10, 147, 150, 0.06) 0%, rgba(148, 210, 189, 0.1) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-header p {
+            margin: 0 auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 580px) {
+            .cards-grid--2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 1.75rem 1.5rem;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--secundario);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at top right, rgba(148, 210, 189, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--card-shadow-hover);
+            border-color: var(--acento);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .card-label {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+        }
+
+        .card-value {
+            font-family: 'TruchaFont', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--principal);
+            line-height: 1.15;
+        }
+
+        .card-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .card--accent {
+            border-left-color: var(--acento);
+        }
+
+        .card--accent .card-value {
+            color: var(--secundario);
+        }
+
+        .feeding-highlight {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2.25rem 2rem;
+        }
+
+        .feeding-highlight .card-icon {
+            font-size: 2.8rem;
+        }
+
+        .feeding-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            justify-content: center;
+        }
+
+        .feeding-tag {
+            background: rgba(10, 147, 150, 0.08);
+            color: var(--secundario);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(10, 147, 150, 0.15);
+        }
+
+        .chart-container {
+            margin-bottom: 2.5rem;
+        }
+
+        .chart-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--acento);
+            margin-bottom: 1rem;
+            text-align: center;
+            letter-spacing: 0.02em;
+        }
+
+        .chart-canvas-wrap {
+            position: relative;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(148, 210, 189, 0.1);
+            overflow: hidden;
+        }
+
+        .chart-canvas-wrap canvas {
+            display: block;
+        }
+
+        .chart-description {
+            font-size: 0.85rem;
+            color: rgba(224, 242, 241, 0.5);
+            text-align: center;
+            margin-top: 0.75rem;
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 1.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .pie-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: rgba(224, 242, 241, 0.75);
+        }
+
+        .pie-legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .bar-tooltip {
+            position: absolute;
+            background: var(--principal);
+            color: #fff;
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+            z-index: 10;
+            transform: translateX(-50%);
+        }
+
+        .bar-tooltip.visible {
+            opacity: 1;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 580px) {
+            .impact-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .impact-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            background: #fff;
+            padding: 1.25rem;
+            border-radius: var(--radius);
+            box-shadow: var(--card-shadow);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .impact-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .impact-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .impact-text h3 {
+            font-family: 'TruchaFont', sans-serif;
+            font-size: 0.95rem;
+            color: var(--principal);
+            margin-bottom: 0.3rem;
+        }
+
+        .impact-text p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ===== SECCIÓN ELEMENTOS VISUALES ===== */
+        .visual-font-section {
+            background: linear-gradient(170deg, var(--bg-dark) 0%, var(--principal) 40%, var(--secundario) 100%);
+            padding: 4rem 1.25rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .visual-font-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(148, 210, 189, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .visual-font-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .visual-font-inner h2 {
+            color: var(--text-light);
+            font-size: clamp(1.4rem, 4vw, 2rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-font-subtitle {
+            color: var(--acento);
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+
+        .vf-row {
+            font-family: 'TruchaFont', sans-serif;
+            line-height: 1.35;
+            white-space: nowrap;
+            overflow: hidden;
+            user-select: none;
+            margin-bottom: 0.25rem;
+        }
+
+        .vf-row--seq {
+            font-size: clamp(60px, 12vw, 100px);
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(148, 210, 189, 0.3);
+            letter-spacing: 0.22em;
+        }
+
+        .vf-row--filled {
+            font-size: clamp(60px, 11vw, 95px);
+            color: rgba(148, 210, 189, 0.1);
+            -webkit-text-stroke: none;
+            letter-spacing: 0.18em;
+        }
+
+        .vf-row--outline-gold {
+            font-size: clamp(60px, 10vw, 88px);
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(233, 216, 166, 0.28);
+            letter-spacing: 0.2em;
+        }
+
+        .vf-row--bold-faint {
+            font-size: clamp(65px, 13vw, 110px);
+            color: rgba(148, 210, 189, 0.18);
+            -webkit-text-stroke: none;
+            letter-spacing: 0.12em;
+        }
+
+        .vf-row--thin-stroke {
+            font-size: clamp(55px, 10vw, 85px);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(224, 242, 241, 0.18);
+            letter-spacing: 0.3em;
+        }
+
+        .vf-row--drift-r {
+            font-size: clamp(60px, 11vw, 96px);
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(10, 147, 150, 0.35);
+            letter-spacing: 0.2em;
+            animation: drift-right 9s ease-in-out infinite;
+        }
+
+        .vf-row--drift-l {
+            font-size: clamp(58px, 10.5vw, 90px);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(148, 210, 189, 0.22);
+            letter-spacing: 0.25em;
+            animation: drift-left 11s ease-in-out infinite;
+        }
+
+        .vf-row--solid-soft {
+            font-size: clamp(60px, 11vw, 92px);
+            color: rgba(10, 147, 150, 0.12);
+            -webkit-text-stroke: 1px rgba(148, 210, 189, 0.15);
+            letter-spacing: 0.2em;
+        }
+
+        @keyframes drift-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(14px); }
+        }
+
+        @keyframes drift-left {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-14px); }
+        }
+
+        .visual-font-tag {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(148, 210, 189, 0.25);
+            border-radius: 50px;
+            color: rgba(224, 242, 241, 0.5);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #001F26;
+            padding: 2rem 1.25rem;
+            text-align: center;
+        }
+
+        .footer-sources {
+            font-size: 0.78rem;
+            color: rgba(224, 242, 241, 0.4);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .footer-sources strong {
+            color: rgba(224, 242, 241, 0.6);
+            font-weight: 600;
+        }
+
+        .footer-credit {
+            font-size: 0.85rem;
+            color: var(--acento);
+            font-weight: 500;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(148, 210, 189, 0.12);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secundario), var(--acento));
+            border-radius: 2px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .dark-section .divider {
+            background: linear-gradient(90deg, var(--acento), rgba(148, 210, 189, 0.4));
+        }
+
+        .visual-font-section .divider {
+            background: linear-gradient(90deg, var(--acento), rgba(148, 210, 189, 0.4));
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+            .vf-row--drift-r,
+            .vf-row--drift-l {
+                animation: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .section {
+                padding: 4rem 2rem;
+            }
+            .card {
+                padding: 2rem 1.75rem;
+            }
+            .header {
+                min-height: 70vh;
+                padding: 4rem 2rem;
+            }
+            .visual-font-section {
+                padding: 5rem 2rem;
+            }
+            .vf-row--seq,
+            .vf-row--filled,
+            .vf-row--outline-gold,
+            .vf-row--bold-faint,
+            .vf-row--thin-stroke,
+            .vf-row--drift-r,
+            .vf-row--drift-l,
+            .vf-row--solid-soft {
+                letter-spacing: 0.35em;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .section {
+                padding: 5rem 2.5rem;
+            }
+            .section-inner {
+                max-width: 1040px;
+            }
+            .visual-font-inner {
+                max-width: 1040px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <span class="header-emoji" aria-hidden="true">🐟</span>
+        <h1>Crianza de Truchas</h1>
+        <p class="header-subtitle">Guía interactiva de acuicultura sostenible</p>
+    </header>
+
+    <div class="wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <path d="M0,30 C180,70 360,10 540,40 C720,70 900,10 1080,40 C1260,70 1380,30 1440,40 L1440,80 L0,80 Z" fill="#F0F7F4"/>
+        </svg>
+    </div>
+
+    <section class="section">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <h2>¿Qué es la Crianza de Truchas?</h2>
+                <p>La truchicultura es el proceso de cultivo controlado de truchas en ambientes acuáticos, con el objetivo de producir alimento de alta calidad proteica de manera sostenible y eficiente.</p>
+            </div>
+            <div class="reveal reveal-delay-2" style="text-align:center;">
+                <p>Esta práctica combina conocimientos de biología, ingeniería y gestión para mantener condiciones óptimas de agua, alimentación y sanidad, garantizando un producto final que llega a los mercados con estándares de frescura y seguridad alimentaria.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section accent-section">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <h2>Condiciones del Agua</h2>
+                <p>El agua es el factor más crítico. Estos son los parámetros ideales para un desarrollo saludable.</p>
+            </div>
+            <div class="cards-grid cards-grid--2">
+                <div class="card reveal reveal-delay-1">
+                    <span class="card-icon" aria-hidden="true">🌡️</span>
+                    <div class="card-label">Temperatura Ideal</div>
+                    <div class="card-value">20°C – 30°C</div>
+                    <div class="card-desc">Rango óptimo para el metabolismo y crecimiento eficiente de la trucha.</div>
+                </div>
+                <div class="card reveal reveal-delay-2">
+                    <span class="card-icon" aria-hidden="true">💧</span>
+                    <div class="card-label">Oxígeno Disuelto</div>
+                    <div class="card-value">5 – 10 ppm</div>
+                    <div class="card-desc">Niveles adecuados de oxígeno aseguran una respiración óptima y reducen el estrés.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <h2>Alimentación</h2>
+                <p>Una nutrición balanceada es clave para el crecimiento rápido y la salud de los peces.</p>
+            </div>
+            <div class="card card--accent feeding-highlight reveal reveal-delay-1">
+                <span class="card-icon" aria-hidden="true">🍽️</span>
+                <div class="card-label">Frecuencia de Alimentación</div>
+                <div class="card-value">3 – 4 veces al día</div>
+                <div class="feeding-details">
+                    <span class="feeding-tag">Alimento balanceado</span>
+                    <span class="feeding-tag">Proteína 35–45%</span>
+                    <span class="feeding-tag">Ración controlada</span>
+                    <span class="feeding-tag">Horarios fijos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section accent-section">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <h2>Producción</h2>
+                <p>Del alevín al producto comercial: tiempos y tallas esperadas.</p>
+            </div>
+            <div class="cards-grid cards-grid--2">
+                <div class="card reveal reveal-delay-1">
+                    <span class="card-icon" aria-hidden="true">⏱️</span>
+                    <div class="card-label">Tiempo de Producción</div>
+                    <div class="card-value">9 meses</div>
+                    <div class="card-desc">Ciclo completo desde la siembra hasta alcanzar el peso comercial óptimo.</div>
+                </div>
+                <div class="card reveal reveal-delay-2">
+                    <span class="card-icon" aria-hidden="true">📏</span>
+                    <div class="card-label">Tamaño Comercial</div>
+                    <div class="card-value">30 – 40 cm</div>
+                    <div class="card-desc">Longitud estándar para la comercialización en mercados nacionales e internacionales.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <path d="M0,45 C200,10 400,70 600,35 C800,0 1000,60 1200,35 C1350,15 1420,40 1440,45 L1440,80 L0,80 Z" fill="#003844"/>
+        </svg>
+    </div>
+
+    <section class="section dark-section" id="chartsSection">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <h2>Datos Estadísticos</h2>
+                <p>Visualización del crecimiento mensual y la distribución de costos en la producción truchícola.</p>
+            </div>
+
+            <div class="chart-container reveal" id="barChartWrap">
+                <div class="chart-title">Crecimiento Mensual de Peso (gramos)</div>
+                <div class="chart-canvas-wrap" id="barCanvasWrap">
+                    <canvas id="barChart"></canvas>
+                    <div class="bar-tooltip" id="barTooltip"></div>
+                </div>
+                <div class="chart-description">Peso acumulado promedio durante los 9 meses del ciclo productivo</div>
+            </div>
+
+            <div class="chart-container reveal" id="pieChartWrap">
+                <div class="chart-title">Distribución de Costos de Producción</div>
+                <div class="chart-canvas-wrap" id="pieCanvasWrap">
+                    <canvas id="pieChart"></canvas>
+                </div>
+                <div class="pie-legend" id="pieLegend"></div>
+                <div class="chart-description">Desglose porcentual del presupuesto total de operación</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+            <path d="M0,35 C240,75 480,5 720,40 C960,75 1200,5 1440,35 L1440,80 L0,80 Z" fill="#F0F7F4"/>
+        </svg>
+    </div>
+
+    <section class="section">
+        <div class="section-inner">
+            <div class="section-header reveal">
+                <div class="divider"></div>
+                <h2>Impacto Ambiental</h2>
+                <p>La acuicultura responsable ofrece ventajas significativas frente a otras producciones animales.</p>
+            </div>
+            <div class="impact-grid">
+                <div class="impact-item reveal reveal-delay-1">
+                    <span class="impact-icon" aria-hidden="true">🌿</span>
+                    <div class="impact-text">
+                        <h3>Baja Huella de Carbono</h3>
+                        <p>Genera menos emisiones de gases de efecto invernadero comparada con la ganadería tradicional.</p>
+                    </div>
+                </div>
+                <div class="impact-item reveal reveal-delay-2">
+                    <span class="impact-icon" aria-hidden="true">💧</span>
+                    <div class="impact-text">
+                        <h3>Uso Eficiente del Agua</h3>
+                        <p>Los sistemas recirculantes permiten reutilizar hasta el 90% del agua, minimizando el consumo.</p>
+                    </div>
+                </div>
+                <div class="impact-item reveal reveal-delay-3">
+                    <span class="impact-icon" aria-hidden="true">🔄</span>
+                    <div class="impact-text">
+                        <h3>Excelente Conversión Alimenticia</h3>
+                        <p>Índice de 1.2–1.5 kg de alimento por kg de trucha, muy superior al de otras especies.</p>
+                    </div>
+                </div>
+                <div class="impact-item reveal reveal-delay-4">
+                    <span class="impact-icon" aria-hidden="true">⚠️</span>
+                    <div class="impact-text">
+                        <h3>Gestión de Efluentes</h3>
+                        <p>Requiere tratamiento adecuado de las aguas residuales para evitar impacto en ecosistemas cercanos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN ELEMENTOS VISUALES ===== -->
+    <section class="visual-font-section reveal">
+        <div class="visual-font-inner">
+            <div class="divider"></div>
+            <h2>Elementos Visuales</h2>
+            <p class="visual-font-subtitle">Tipografía como expresión gráfica</p>
+
+            <div class="vf-row vf-row--bold-faint">AAA BBB CCC DDD</div>
+            <div class="vf-row vf-row--seq">ABCDEFGHIJ</div>
+            <div class="vf-row vf-row--filled">EEE FFF GGG HHH</div>
+            <div class="vf-row vf-row--outline-gold">III JJJ AAA BBB</div>
+            <div class="vf-row vf-row--drift-r">CCC DDD EEE FFF</div>
+            <div class="vf-row vf-row--thin-stroke">GGG HHH III JJJ</div>
+            <div class="vf-row vf-row--solid-soft">ABCDEFGHIJ</div>
+            <div class="vf-row vf-row--drift-l">DDD EEE FFF GGG</div>
+
+            <div class="visual-font-tag">TruchaFont — Gabriel Navarro</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-sources">
+            <strong>Fuentes:</strong> ASC, Atlas Scientific, Finnforel, Seafish, Stanford OVAL, The Fish Site
+        </div>
+        <div class="footer-credit">Diseñado por: Gabriel Adrian Navarro Puertas</div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            function easeOutCubic(t) {
+                return 1 - Math.pow(1 - t, 3);
+            }
+
+            function easeOutQuart(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+
+            function setupCanvas(canvas, cssHeight) {
+                var wrap = canvas.parentElement;
+                var dpr = window.devicePixelRatio || 1;
+                var cssWidth = wrap.clientWidth;
+
+                if (cssWidth < 1) cssWidth = 300;
+                if (cssHeight < 1) cssHeight = 300;
+
+                canvas.style.width = cssWidth + 'px';
+                canvas.style.height = cssHeight + 'px';
+                canvas.width = Math.round(cssWidth * dpr);
+                canvas.height = Math.round(cssHeight * dpr);
+
+                var ctx = canvas.getContext('2d');
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                return { ctx: ctx, width: cssWidth, height: cssHeight };
+            }
+
+            var revealElements = document.querySelectorAll('.reveal');
+            var revealObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            revealElements.forEach(function(el) {
+                revealObserver.observe(el);
+            });
+
+            var barData = [
+                { label: 'Mes 1', value: 5 },
+                { label: 'Mes 2', value: 15 },
+                { label: 'Mes 3', value: 30 },
+                { label: 'Mes 4', value: 55 },
+                { label: 'Mes 5', value: 90 },
+                { label: 'Mes 6', value: 140 },
+                { label: 'Mes 7', value: 200 },
+                { label: 'Mes 8', value: 270 },
+                { label: 'Mes 9', value: 350 }
+            ];
+
+            var pieData = [
+                { label: 'Alimentación', value: 55, color: '#005F73' },
+                { label: 'Energía y agua', value: 18, color: '#0A9396' },
+                { label: 'Mano de obra', value: 15, color: '#94D2BD' },
+                { label: 'Alevines', value: 8, color: '#004E5A' },
+                { label: 'Otros', value: 4, color: '#E9D8A6' }
+            ];
+
+            var BAR_HEIGHT = 300;
+            var PIE_HEIGHT = 360;
+
+            var barCanvas = document.getElementById('barChart');
+            var barTooltip = document.getElementById('barTooltip');
+            var barAnimated = false;
+            var barChartState = { bars: [], hoveredIndex: -1 };
+
+            function drawBarChart(progress) {
+                var s = setupCanvas(barCanvas, BAR_HEIGHT);
+                var ctx = s.ctx;
+                var w = s.width;
+                var h = s.height;
+
+                var pad = { top: 35, right: 20, bottom: 45, left: 52 };
+                var chartW = w - pad.left - pad.right;
+                var chartH = h - pad.top - pad.bottom;
+
+                if (chartW < 10 || chartH < 10) return;
+
+                var maxVal = 400;
+                var gridSteps = [0, 100, 200, 300, 400];
+                var slotW = chartW / barData.length;
+                var barW = Math.max(8, slotW * 0.55);
+
+                ctx.clearRect(0, 0, w, h);
+
+                gridSteps.forEach(function(val) {
+                    var y = pad.top + chartH - (val / maxVal) * chartH;
+                    ctx.strokeStyle = 'rgba(148, 210, 189, 0.12)';
+                    ctx.lineWidth = 1;
+                    ctx.beginPath();
+                    ctx.moveTo(pad.left, y);
+                    ctx.lineTo(w - pad.right, y);
+                    ctx.stroke();
+
+                    ctx.fillStyle = 'rgba(224, 242, 241, 0.5)';
+                    ctx.font = '11px -apple-system, sans-serif';
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(val + 'g', pad.left - 10, y);
+                });
+
+                ctx.strokeStyle = 'rgba(148, 210, 189, 0.3)';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(pad.left, pad.top + chartH);
+                ctx.lineTo(w - pad.right, pad.top + chartH);
+                ctx.stroke();
+
+                barChartState.bars = [];
+
+                barData.forEach(function(d, i) {
+                    var x = pad.left + slotW * i + (slotW - barW) / 2;
+                    var rawH = (d.value / maxVal) * chartH;
+                    var barH = rawH * progress;
+                    var y = pad.top + chartH - barH;
+
+                    var grad = ctx.createLinearGradient(x, y, x, pad.top + chartH);
+                    if (i === barChartState.hoveredIndex) {
+                        grad.addColorStop(0, '#E9D8A6');
+                        grad.addColorStop(1, '#94D2BD');
+                    } else {
+                        grad.addColorStop(0, '#94D2BD');
+                        grad.addColorStop(1, '#0A9396');
+                    }
+
+                    var r = Math.min(5, barW / 2, barH / 2);
+                    r = Math.max(0, r);
+                    ctx.fillStyle = grad;
+                    ctx.beginPath();
+                    if (barH > r * 2) {
+                        ctx.moveTo(x + r, y);
+                        ctx.lineTo(x + barW - r, y);
+                        ctx.quadraticCurveTo(x + barW, y, x + barW, y + r);
+                        ctx.lineTo(x + barW, pad.top + chartH);
+                        ctx.lineTo(x, pad.top + chartH);
+                        ctx.lineTo(x, y + r);
+                        ctx.quadraticCurveTo(x, y, x + r, y);
+                    } else if (barH > 0.5) {
+                        ctx.rect(x, y, barW, barH);
+                    }
+                    ctx.fill();
+
+                    barChartState.bars.push({
+                        x: x, y: y, w: barW, h: barH,
+                        value: d.value, label: d.label,
+                        baseY: pad.top + chartH
+                    });
+
+                    ctx.fillStyle = 'rgba(224, 242, 241, 0.6)';
+                    ctx.font = '10px -apple-system, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(d.label, x + barW / 2, pad.top + chartH + 10);
+
+                    if (progress > 0.85 && barH > 5) {
+                        var valAlpha = Math.min(1, (progress - 0.85) / 0.15);
+                        ctx.fillStyle = 'rgba(224, 242, 241,' + (valAlpha * 0.9) + ')';
+                        ctx.font = 'bold 10px -apple-system, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(d.value + 'g', x + barW / 2, y - 5);
+                    }
+                });
+            }
+
+            function animateBarChart() {
+                var duration = 1300;
+                var start = performance.now();
+                function frame(now) {
+                    var elapsed = now - start;
+                    var progress = Math.min(elapsed / duration, 1);
+                    var eased = easeOutQuart(progress);
+                    drawBarChart(eased);
+                    if (progress < 1) {
+                        requestAnimationFrame(frame);
+                    }
+                }
+                requestAnimationFrame(frame);
+            }
+
+            barCanvas.addEventListener('mousemove', function(e) {
+                if (!barAnimated) return;
+                var rect = barCanvas.getBoundingClientRect();
+                var scaleX = barCanvas.style.width ? parseFloat(barCanvas.style.width) / rect.width : 1;
+                var scaleY = barCanvas.style.height ? parseFloat(barCanvas.style.height) / rect.height : 1;
+                var mx = (e.clientX - rect.left) * scaleX;
+                var my = (e.clientY - rect.top) * scaleY;
+                var found = -1;
+
+                for (var i = 0; i < barChartState.bars.length; i++) {
+                    var b = barChartState.bars[i];
+                    if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.baseY) {
+                        found = i;
+                        break;
+                    }
+                }
+
+                if (found !== barChartState.hoveredIndex) {
+                    barChartState.hoveredIndex = found;
+                    drawBarChart(1);
+                }
+
+                if (found >= 0) {
+                    var bar = barChartState.bars[found];
+                    var tooltipX = (bar.x + bar.w / 2) / scaleX;
+                    var tooltipY = (bar.y - 12) / scaleY;
+                    barTooltip.textContent = bar.label + ': ' + bar.value + 'g';
+                    barTooltip.style.left = tooltipX + 'px';
+                    barTooltip.style.top = tooltipY + 'px';
+                    barTooltip.classList.add('visible');
+                    barCanvas.style.cursor = 'pointer';
+                } else {
+                    barTooltip.classList.remove('visible');
+                    barCanvas.style.cursor = 'default';
+                }
+            });
+
+            barCanvas.addEventListener('mouseleave', function() {
+                if (!barAnimated) return;
+                barChartState.hoveredIndex = -1;
+                drawBarChart(1);
+                barTooltip.classList.remove('visible');
+                barCanvas.style.cursor = 'default';
+            });
+
+            barCanvas.addEventListener('touchstart', function(e) {
+                if (!barAnimated) return;
+                var rect = barCanvas.getBoundingClientRect();
+                var scaleX = parseFloat(barCanvas.style.width) / rect.width;
+                var scaleY = parseFloat(barCanvas.style.height) / rect.height;
+                var touch = e.touches[0];
+                var mx = (touch.clientX - rect.left) * scaleX;
+                var my = (touch.clientY - rect.top) * scaleY;
+                var found = -1;
+
+                for (var i = 0; i < barChartState.bars.length; i++) {
+                    var b = barChartState.bars[i];
+                    if (mx >= b.x && mx <= b.x + b.w && my >= b.y && my <= b.baseY) {
+                        found = i;
+                        break;
+                    }
+                }
+
+                if (found >= 0) {
+                    var bar = barChartState.bars[found];
+                    var tooltipX = (bar.x + bar.w / 2) / scaleX;
+                    var tooltipY = (bar.y - 12) / scaleY;
+                    barTooltip.textContent = bar.label + ': ' + bar.value + 'g';
+                    barTooltip.style.left = tooltipX + 'px';
+                    barTooltip.style.top = tooltipY + 'px';
+                    barTooltip.classList.add('visible');
+                    setTimeout(function() { barTooltip.classList.remove('visible'); }, 1500);
+                }
+            }, { passive: true });
+
+            var pieCanvas = document.getElementById('pieChart');
+            var pieAnimated = false;
+
+            function drawPieChart(progress) {
+                var s = setupCanvas(pieCanvas, PIE_HEIGHT);
+                var ctx = s.ctx;
+                var w = s.width;
+                var h = s.height;
+
+                ctx.clearRect(0, 0, w, h);
+
+                var centerX = w / 2;
+                var centerY = h / 2;
+                var radius = Math.max(20, Math.min(w, h) / 2 - 30);
+                var total = pieData.reduce(function(sum, d) { return sum + d.value; }, 0);
+                var currentAngle = -Math.PI / 2;
+
+                pieData.forEach(function(d, i) {
+                    var sliceAngle = (d.value / total) * 2 * Math.PI * progress;
+
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                    ctx.closePath();
+                    ctx.fillStyle = d.color;
+                    ctx.fill();
+
+                    ctx.strokeStyle = '#003844';
+                    ctx.lineWidth = 2.5;
+                    ctx.stroke();
+
+                    if (progress > 0.7 && d.value >= 8) {
+                        var midAngle = currentAngle + sliceAngle / 2;
+                        var labelR = radius * 0.62;
+                        var lx = centerX + Math.cos(midAngle) * labelR;
+                        var ly = centerY + Math.sin(midAngle) * labelR;
+                        var alpha = Math.min(1, (progress - 0.7) / 0.3);
+
+                        ctx.fillStyle = 'rgba(255,255,255,' + alpha + ')';
+                        ctx.font = 'bold 13px -apple-system, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(d.value + '%', lx, ly);
+                    }
+
+                    currentAngle += sliceAngle;
+                });
+
+                var innerR = radius * 0.28;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, innerR, 0, Math.PI * 2);
+                ctx.fillStyle = '#003844';
+                ctx.fill();
+
+                if (progress > 0.9) {
+                    var cAlpha = Math.min(1, (progress - 0.9) / 0.1);
+                    ctx.fillStyle = 'rgba(148, 210, 189,' + cAlpha + ')';
+                    ctx.font = 'bold 14px -apple-system, sans-serif';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('100%', centerX, centerY);
+                }
+            }
+
+            function animatePieChart() {
+                var duration = 1500;
+                var start = performance.now();
+                function frame(now) {
+                    var elapsed = now - start;
+                    var progress = Math.min(elapsed / duration, 1);
+                    var eased = easeOutCubic(progress);
+                    drawPieChart(eased);
+                    if (progress < 1) {
+                        requestAnimationFrame(frame);
+                    }
+                }
+                requestAnimationFrame(frame);
+            }
+
+            var legendEl = document.getElementById('pieLegend');
+            pieData.forEach(function(d) {
+                var item = document.createElement('div');
+                item.className = 'pie-legend-item';
+                item.innerHTML = '<span class="pie-legend-color" style="background:' + d.color + '"></span>' + d.label + ' (' + d.value + '%)';
+                legendEl.appendChild(item);
+            });
+
+            var barChartWrap = document.getElementById('barChartWrap');
+            var pieChartWrap = document.getElementById('pieChartWrap');
+
+            var chartObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        if (entry.target === barChartWrap && !barAnimated) {
+                            barAnimated = true;
+                            setTimeout(function() {
+                                drawBarChart(0);
+                                requestAnimationFrame(animateBarChart);
+                            }, 200);
+                        }
+                        if (entry.target === pieChartWrap && !pieAnimated) {
+                            pieAnimated = true;
+                            setTimeout(function() {
+                                drawPieChart(0);
+                                requestAnimationFrame(animatePieChart);
+                            }, 400);
+                        }
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            chartObserver.observe(barChartWrap);
+            chartObserver.observe(pieChartWrap);
+
+            var resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    if (barAnimated) drawBarChart(1);
+                    if (pieAnimated) drawPieChart(1);
+                }, 150);
+            });
+
+        });
+    </script>
+</body>
+</html>
